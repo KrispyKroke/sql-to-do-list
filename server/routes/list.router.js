@@ -30,6 +30,8 @@ router.post('/', (req, res) => {
     });
 });
 
+// Server-side DELETE request. Targets a task by id and deletes it from the database when request 
+// encounters no errors. Sends back a 204 No Content status code.
 router.delete('/:id', (req, res) => {
     let taskID = req.params.id;
     let queryText = `DELETE FROM tasks WHERE "id" = $1;`;
@@ -41,6 +43,20 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+// Server-side PUT request. Targets a task by id and changes its completion status to true or false 
+// depending on its current status on the front-end. Will implement the ability to toggle between completed and
+// uncompleted on the front-end.
+router.put('/:id', (req, res) => {
+    let taskID = req.params.id;
+    let completionStatus = req.body.completionStatus;
+    let queryText = `UPDATE tasks SET "completionStatus" = $1 WHERE "id" = $2;`;
+    pool.query(queryText, [completionStatus, taskID]).then(() => {
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    });
+});
 
 
 
