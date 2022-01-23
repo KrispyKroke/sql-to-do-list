@@ -16,9 +16,17 @@ body {
     border-radius: 20mm;
 }
 
+#deleteButton {
+    background-color: RGB(243, 23, 45);
+    color: limegreen;
+    font-size: larger;
+}
+
+
 .endButton {
     display: block;
     margin: auto;
+    cursor: pointer;
 }
 
 #submitTask:hover {

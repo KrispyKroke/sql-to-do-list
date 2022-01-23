@@ -6,6 +6,7 @@ function onReady() {
     showTasks();
     // Waits for a task to be submitted before initiating the addTask function
     $('#submitTask').on('click', addTask);
+    $('#toDoList').on('click', '#deleteButton', removeTask);
 }
 // Function which makes an ajax GET request to the server to retrieve all tasks stored in the database.
 function showTasks() {
@@ -55,6 +56,18 @@ function addTask() {
         // Empties inputs on successful addition of task. 
         // Calls the showTasks function to show all tasks on the DOM, including the recently added task.
         $('#newTask').val('');
+        showTasks();
+    }).catch((error) => {
+        alert(error);
+    });
+}
+
+function removeTask(event) {
+    let targetedTask = $(event.target).data('id');
+    $.ajax({
+        method: 'DELETE',
+        url: `/list/${targetedTask}`
+    }).then(() => {
         showTasks();
     }).catch((error) => {
         alert(error);
