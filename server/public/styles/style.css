@@ -1,0 +1,35 @@
+.extraColumn {
+    color: transparent;
+}
+
+#lastColumn {
+    border-right: 0px solid white;
+}
+
+#submitTask {
+    cursor: pointer;
+    background-color: limegreen;
+    border-radius: 20mm;
+}
+
+#submitTask:hover {
+    font-size: x-large;
+}
+
+input, #submitTask {
+    font-size: larger;
+}
+
+table {
+    border: 5px solid black;
+    width: 100%;
+    margin-top: 20px;
+}
+
+th, td {
+    border-right: 5px solid black;
+}
+
+h1 {
+    font-family: Impact;
+}

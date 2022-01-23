@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="vendors/jquery.js"></script>
     <script src="scripts/client.js"></script>
+    <link rel="stylesheet" href="styles/style.css"/>
     <title>SQL To-do List</title>
 </head>
 <body>
@@ -13,9 +14,17 @@
         <h1>To-Do List</h1>
     </main>
     <div>
+        <input id="newTask" type="text" placeholder="New Task"/>
+        <button id="submitTask">Add Task</button> 
+    </div>
+    <div>
         <table>
             <thead>
-
+                <th>Task</th>
+                <th>Description</th>
+                <th>Completed (Y/N)</th>
+                <th class="extraColumn">asdfghjk</th>
+                <th class="extraColumn" id="lastColumn">asdfhdfs</th>
             </thead>
             <tbody id="toDoList">
 
