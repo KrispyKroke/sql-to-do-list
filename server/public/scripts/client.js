@@ -23,15 +23,19 @@ function showTasks() {
         for (task of response) {
             // Gives each task an 'N' or 'Y' depending on completion status in the database
             let status = 'N';
+            // Gives tasks a class of 'completed' if they have been completed and takes away that class
+            // if they have not been completed. Adds additional styling to the front-end if they have been completed.
+            let newClass = '';
             if (task.completionStatus === true) {
                 status = 'Y';
+                newClass = 'completed';
             }
             // Appends all tasks in the database to the DOM
-            $('#toDoList').append(`<tr>
-                <td>${count}</td>
-                <td>${task.task}</td>
-                <td>${status}</td>
-                <td><button class="endButton" id="completionButton" data-id="${task.id}" data-status="${task.completionStatus}">Mark as Complete/Incomplete</button></td>
+            $('#toDoList').append(`<tr class=${newClass}>
+                <td class=${newClass}>${count}</td>
+                <td class=${newClass}>${task.task}</td>
+                <td class=${newClass}>${status}</td>
+                <td><button class="endButton ${newClass}" id="completionButton" data-id="${task.id}" data-status="${task.completionStatus}">Mark as Complete/Incomplete</button></td>
                 <td><button class="endButton" id="deleteButton" data-id="${task.id}">Delete Task</button></td>
             </tr>`);
             count++;
@@ -76,15 +80,18 @@ function removeTask(event) {
         alert(error);
     });
 }
-
+// Function which handles the updating of status of a task when the update status button is clicked.
+// Uses event.target to change the status of the targeted task and calls the showTasks function afterwards
+// to refresh the task list on the DOM.
 function updateTask(event) {
     let targetedTask = $(event.target).data('id');
     let currentStatus = $(event.target).data('status');
+    const newStatus = !currentStatus;
     $.ajax({
         method: 'PUT',
         url: `/list/${targetedTask}`,
         data: {
-            completionStatus: !currentStatus
+            completionStatus: newStatus
         }
     }).then(() => {
         showTasks();

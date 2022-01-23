@@ -10,6 +10,11 @@ body {
     border-right: 0px solid white;
 }
 
+.completed {
+    background-color: greenyellow;
+    font-style: italic;
+}
+
 #submitTask {
     cursor: pointer;
     background-color: limegreen;
