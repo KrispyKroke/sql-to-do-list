@@ -6,7 +6,9 @@ function onReady() {
     showTasks();
     // Waits for a task to be submitted before initiating the addTask function
     $('#submitTask').on('click', addTask);
+    // Waits for the user to click on a delete button before calling the removeTask function to delete that row
     $('#toDoList').on('click', '#deleteButton', removeTask);
+    $('#toDoList').on('click', '#completionButton', updateTask);
 }
 // Function which makes an ajax GET request to the server to retrieve all tasks stored in the database.
 function showTasks() {
@@ -29,7 +31,7 @@ function showTasks() {
                 <td>${count}</td>
                 <td>${task.task}</td>
                 <td>${status}</td>
-                <td><button class="endButton" id="completionButton" data-id="${task.id}">Mark as Complete/Incomplete</button></td>
+                <td><button class="endButton" id="completionButton" data-id="${task.id}" data-status="${task.completionStatus}">Mark as Complete/Incomplete</button></td>
                 <td><button class="endButton" id="deleteButton" data-id="${task.id}">Delete Task</button></td>
             </tr>`);
             count++;
@@ -61,12 +63,29 @@ function addTask() {
         alert(error);
     });
 }
-
+// Function which uses event.target to target a task by ID in relation to the row in which the delete
+// button is clicked.  Makes an ajax request to delete that task from the database and then refreshes the task list on the DOM.
 function removeTask(event) {
     let targetedTask = $(event.target).data('id');
     $.ajax({
         method: 'DELETE',
         url: `/list/${targetedTask}`
+    }).then(() => {
+        showTasks();
+    }).catch((error) => {
+        alert(error);
+    });
+}
+
+function updateTask(event) {
+    let targetedTask = $(event.target).data('id');
+    let currentStatus = $(event.target).data('status');
+    $.ajax({
+        method: 'PUT',
+        url: `/list/${targetedTask}`,
+        data: {
+            completionStatus: !currentStatus
+        }
     }).then(() => {
         showTasks();
     }).catch((error) => {
