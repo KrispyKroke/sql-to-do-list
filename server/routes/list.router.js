@@ -7,7 +7,7 @@ const pool = require('../modules/pool.js');
 // Server-side GET request. Queries the database to retrieve all tasks stored in it and sends them back
 // to the front-end upon successful retrieval.
 router.get('/', (req, res) => {
-    let queryText = 'SELECT * FROM tasks;';
+    let queryText = 'SELECT * FROM tasks ORDER BY "completionStatus";';
     pool.query(queryText).then((response) => {
         res.send(response.rows);
     }).catch((error) => {
