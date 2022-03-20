@@ -1,7 +1,7 @@
 # SQL To-Do List
 
 
-# Description
+## Description
 
 Duration: 2-3 days
 
