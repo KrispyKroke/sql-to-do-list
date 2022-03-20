@@ -15,7 +15,7 @@ The final product allowed a user to add a task, show all tasks on the DOM, toggl
 
 ## List with 3 Tasks
 
-Below is a screenshot of the list with 3 tasks already added.  Each task is incomplete.  The user can add additional tasks or delete existing tasks as well.
+Below is a screenshot of the list with 3 tasks already added.  Each task is incomplete.  The user can add additional tasks or delete existing tasks as well.  They can also mark tasks as complete/incomplete.
 
-
+<img width="1268" alt="Screen Shot 2022-03-20 at 1 34 32 PM" src="https://user-images.githubusercontent.com/91631646/159177519-6598a65a-2bec-4eca-bcdb-bb17efc0d640.png">
 
